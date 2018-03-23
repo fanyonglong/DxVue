@@ -5,4 +5,5 @@
 使用脚手架Vue.js项目的简单CLI
 ```bash
 npm install -g vue-cli
+npm init webpack my-project
 ```
