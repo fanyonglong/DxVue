@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "cpt": "webpack --config ./build/webpack.components.js --progress --display-error-details ",
+    "build": "webpack --config ./build/webpack.cpt.build.js --progress --display-error-details ",
     "dev":"webpack-dev-server -d --inline --progress --config ./build/webpack.cpt.dev.js",
     "build:dev":"webpack  --config ./build/webpack.cpt.dev.js",
     "dev2":"webpack-dev-server --hot --devtool cheap-module-eval-source-map --output-pathinfo --progress --port 9003 --open Chrome --config ./build/webpack.cpt.dev.js"

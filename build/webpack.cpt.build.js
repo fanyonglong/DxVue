@@ -6,15 +6,15 @@ const glob=require('glob');
 const commonconfig=require('./webpack.common');
 const root= path.resolve(__dirname,'../');
 const webpack=require('webpack');
-var entrys={};
-var files=glob.sync(path.join(root,'src/components/**/*.vue'));
-files.map(function(filePath){
-    entrys[path.dirname(filePath).split(/\\|\//g).pop()]=filePath; //path.relative(root,filePath);
-})
-console.log(entrys);
-
+// var entrys={};
+// var files=glob.sync(path.join(root,'src/components/**/*.vue'));
+// files.map(function(filePath){
+//     entrys[path.filename(filePath)]=filePath;
+// })
 module.exports =merge(commonconfig,{
-    entry:entrys,
+    entry:{
+        'index':path.resolve(root,'src/index.js')
+    },
     output: {
         filename: '[name].js',
         path: path.join(root, 'dist'),
@@ -22,13 +22,10 @@ module.exports =merge(commonconfig,{
     },      
     externals: {
         vue:"vue"
-     },
+      },
     devtool:false,//'eval-cheap-module-source-map', 
     plugins:[new CleanWebpackPlugin(['dist/*'],{
         root: root
-    }),
-    new webpack.optimize.CommonsChunkPlugin({
-        name:"common"
     }),
      new webpack.DefinePlugin({
         //'process.env': require('../config/dev.env')

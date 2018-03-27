@@ -10,6 +10,7 @@ function resolve(filepath)
 }
 const entrys={};
 module.exports ={
+    context:root,
     entry:'',
     output: {
         filename: 'index.js',
@@ -35,11 +36,11 @@ module.exports ={
                     //     presets: ['env'] 
                     // } }],                
                     include: [resolve('src'), resolve('test')],
-                    css:['vue-style-loader','css-loader']
-                    // css: ExtractTextPlugin.extract({
-                    //     use: 'css-loader',
-                    //     fallback: 'vue-style-loader' // <- 这是vue-loader的依赖，所以如果使用npm3，则不需要显式安装
-                    //   })
+                  //  css:['vue-style-loader','css-loader']
+                    css: ExtractTextPlugin.extract({
+                        use: 'css-loader',
+                        fallback: 'vue-style-loader' // <- 这是vue-loader的依赖，所以如果使用npm3，则不需要显式安装
+                      })
                 },
                 cssSourceMap:false
             }
@@ -61,6 +62,6 @@ module.exports ={
 //     vue:"vue"
 //   },
     plugins: [
-       // new ExtractTextPlugin("style.css")
+        new ExtractTextPlugin("style.css")
      ]
 };
