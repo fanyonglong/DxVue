@@ -7,9 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "cpt": "webpack --config ./build/webpack.components.js --progress --display-error-details ",
     "build": "webpack --config ./build/webpack.cpt.build.js --progress --display-error-details ",
-    "dev":"webpack-dev-server -d --inline --progress --config ./build/webpack.cpt.dev.js",
-    "build:dev":"webpack  --config ./build/webpack.cpt.dev.js",
-    "dev2":"webpack-dev-server --hot --devtool cheap-module-eval-source-map --output-pathinfo --progress --port 9003 --open Chrome --config ./build/webpack.cpt.dev.js"
+    "dev": "webpack-dev-server --config ./build/webpack.cpt.dev.js",
+    "build:dev": "webpack --config ./build/webpack.cpt.dev.js",
+    "dev2": "webpack-dev-server --hot --devtool cheap-module-eval-source-map --output-pathinfo --progress --port 9003 --open Chrome --config ./build/webpack.cpt.dev.js"
   },
   "repository": {
     "type": "git",
@@ -40,7 +40,8 @@
     "vuex": "^3.0.1",
     "webpack": "^3.9.1",
     "webpack-dev-server": "^2.11.1",
-    "webpack-merge": "^4.1.2"
+    "webpack-merge": "^4.1.2",
+    "yargs": "^11.0.0"
   },
   "dependencies": {
     "element-ui": "^2.2.2",

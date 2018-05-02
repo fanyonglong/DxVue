@@ -13,14 +13,14 @@ const commonconfig=require('./webpack.common');
 //     entrys[path.filename(filePath)]=filePath;
 // })
 module.exports =(env, argv)=>{
-    
-return merge(commonconfig(env,argv),{
+return merge(commonconfig(env,{extractCss:false}),{
     entry:{
         'index':path.resolve(root,'src/index.js')
     },
     output: {
         filename: '[name].js',
         path: path.join(root, 'dist'),
+        pathinfo:true //告诉 webpack 在 bundle 中引入「所包含模块信息」的相关注释
        // libraryTarget: "umd"
     },       
     plugins:[new CleanWebpackPlugin(['dist/*'],{
@@ -47,7 +47,7 @@ return merge(commonconfig(env,argv),{
         port:9003,
         hot:true,
       //  openPage:
-      //  open:'Chrome',
+        open:'Chrome',
         host:'localhost',
         compress:true,//一切服务都启用gzip 压缩：
         index:"index.html",// 
@@ -57,13 +57,14 @@ return merge(commonconfig(env,argv),{
        // overlay:true, //当存在编译器错误或警告时，在浏览器中显示全屏叠加。默认情况下禁用。如果您只想显示编译器错误：
         watchOptions: {
             poll: config.dev.poll //通过传递 true 开启 polling，或者指定毫秒为单位进行轮询。
-       },
-       setup(app)
-       {
-            // app.get('/', function(req, res) {
-            //     res.send('434343');
-            // });
-       }
+        },
+        progress:true,//将运行进度输出到控制台。
+        setup(app)
+        {
+                // app.get('/', function(req, res) {
+                //     res.send('434343');
+                // });
+        }
     }
 });
 }

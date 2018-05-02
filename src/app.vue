@@ -2,6 +2,7 @@
  <div>
      <div class="left">
            <router-link to="/input">input</router-link>
+
      </div>
      <div class="right">
           <router-view></router-view>

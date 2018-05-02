@@ -3,7 +3,7 @@
         <input type="text" v-model="name">{{name}}
   </div>
 </template>
-<style>
+<style scoped >
 .input-container{
   border: solid 1px red;
 }
