@@ -10,13 +10,24 @@
 </div>
 </template>
 
-<style>
+<style >
 .left{
     width:280px;
 }
 .right{
     width:100%;
     margin-left: 280px;
+}
+:root { 
+  --red: #d33;
+}
+a { 
+  &:hover {
+    color: color(var(--red) a(54%));
+  }
+}
+::placeholder {
+  color: gray;
 }
 </style>
 

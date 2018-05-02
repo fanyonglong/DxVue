@@ -1,6 +1,7 @@
 var path=require('path')
 module.exports={
     extractCss:true,
+    sourceMapEnabled:false,
     dev:{
             port:9003,
             host:'localhost',

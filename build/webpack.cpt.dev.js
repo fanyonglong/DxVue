@@ -13,15 +13,21 @@ const commonconfig=require('./webpack.common');
 //     entrys[path.filename(filePath)]=filePath;
 // })
 module.exports =(env, argv)=>{
-return merge(commonconfig(env,{extractCss:false}),{
+return merge(commonconfig(env,{extractCss:true}),{
     entry:{
         'index':path.resolve(root,'src/index.js')
     },
     output: {
         filename: '[name].js',
         path: path.join(root, 'dist'),
-        pathinfo:true //告诉 webpack 在 bundle 中引入「所包含模块信息」的相关注释
-       // libraryTarget: "umd"
+        chunkFilename:'',
+        pathinfo:true ,//告诉 webpack 在 bundle 中引入「所包含模块信息」的相关注释
+        library: {
+            commonjs: "dx-vuexproject"
+         },
+        libraryTarget: "commonjs",
+        sourceMapFilename:'[file].map',
+        umdNamedDefine:false //会对 UMD 的构建过程中的 AMD 模块进行命名。否则就使用匿名的 define。
     },       
     plugins:[new CleanWebpackPlugin(['dist/*'],{
         root: root
@@ -39,8 +45,17 @@ return merge(commonconfig(env,{extractCss:false}),{
         inject: true
       }),
     ],
+    externals:[{
+        vue:{
+            commonjs:'vue'
+        },
+        'vue-router':{
+            commonjs:'vue-router'
+        }
+    }],
+   // devtool:'source-map',
     //devtool:'eval-source-map',
-    devtool:'eval-cheap-module-source-map',
+   // devtool:'eval-cheap-module-source-map',
     devServer:{
         clientLogLevel:"warning",
         contentBase:[path.resolve(root,'dist')],

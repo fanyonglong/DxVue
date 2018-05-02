@@ -7,7 +7,12 @@
 .input-container{
   border: solid 1px red;
 }
-
+:-webkit-:full-screen {
+}
+:-moz-:full-screen {
+}
+:full-screen {
+}
 </style>
 <script>
 export default {

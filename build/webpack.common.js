@@ -11,6 +11,7 @@ function resolve(filepath)
 }
 
 module.exports =(env,argv)=>{ 
+    
     const entrys={};
     let plugins=[];
     if(argv&&argv.hasOwnProperty('extractCss'))
@@ -18,6 +19,7 @@ module.exports =(env,argv)=>{
         config.extractCss=argv.extractCss;
     }
     config.extractCss;
+    
     if(config.extractCss)
     {
         plugins.push( new ExtractTextPlugin("style.css"));
@@ -43,19 +45,33 @@ module.exports =(env,argv)=>{
                 //     }
                 // },
                 //extractCSS: true,
+                // postcss:{
+                //     useConfigFile:true,   
+                //     config:{
+                //         path:resolve('./')
+                //     } 
+                // },
                 loaders: {
                     js: 'babel-loader',
                     // js:[{ loader: 'babel-loader', options: { 
                     //     presets: ['env'] 
                     // } }],                
                     include: [resolve('src'), resolve('test')],
-                    css:!config.extractCss?['vue-style-loader','css-loader']:
+                    css:!config.extractCss?['vue-style-loader','css-loader',{
+                        loader:'postcss-loader'
+                    }]:
                     ExtractTextPlugin.extract({
-                        use: ['css-loader'],
+                        use: ['css-loader',{
+                            loader:'postcss-loader',
+                            sourceMap:config.sourceMapEnabled
+                        }],
                         fallback: 'vue-style-loader' // <- 这是vue-loader的依赖，所以如果使用npm3，则不需要显式安装
-                      })
+                      }),
+                      postcss:{
+
+                      }
                 },
-                cssSourceMap:false //是否开启 CSS 的 source maps，关闭可以避免 css-loader 的 some relative path related bugs 同时可以加快构建速度。
+                cssSourceMap:config.sourceMapEnabled //是否开启 CSS 的 source maps，关闭可以避免 css-loader 的 some relative path related bugs 同时可以加快构建速度。
             }
         },{
         test:/\.js$/,
