@@ -4,12 +4,25 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require("extract-text-webpack-plugin")
 const root= path.resolve(__dirname,'../');
+const config=require('../config');
 function resolve(filepath)
 {
     return path.resolve(root,filepath);
 }
-const entrys={};
-module.exports ={
+
+module.exports =(env,argv)=>{ 
+    const entrys={};
+    let plugins=[];
+    if(argv&&argv.hasOwnProperty('extractCss'))
+    {
+        config.extractCss=argv.extractCss;
+    }
+    config.extractCss;
+    if(config.extractCss)
+    {
+        plugins.push( new ExtractTextPlugin("style.css"));
+    }
+    return {
     context:root,
     entry:'',
     output: {
@@ -36,13 +49,13 @@ module.exports ={
                     //     presets: ['env'] 
                     // } }],                
                     include: [resolve('src'), resolve('test')],
-                  //  css:['vue-style-loader','css-loader']
-                    css: ExtractTextPlugin.extract({
-                        use: 'css-loader',
+                    css:!config.extractCss?['vue-style-loader','css-loader']:
+                    ExtractTextPlugin.extract({
+                        use: ['css-loader'],
                         fallback: 'vue-style-loader' // <- 这是vue-loader的依赖，所以如果使用npm3，则不需要显式安装
                       })
                 },
-                cssSourceMap:false
+                cssSourceMap:false //是否开启 CSS 的 source maps，关闭可以避免 css-loader 的 some relative path related bugs 同时可以加快构建速度。
             }
         },{
         test:/\.js$/,
@@ -61,7 +74,6 @@ module.exports ={
 //   externals: {
 //     vue:"vue"
 //   },
-    plugins: [
-        new ExtractTextPlugin("style.css")
-     ]
+    plugins:plugins
 };
+}

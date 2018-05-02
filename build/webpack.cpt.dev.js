@@ -3,16 +3,18 @@ const merge = require('webpack-merge');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const glob=require('glob');
-const commonconfig=require('./webpack.common');
 const root= path.resolve(__dirname,'../');
 const webpack=require('webpack');
 const config=require('../config');
+const commonconfig=require('./webpack.common');   
 // var entrys={};
 // var files=glob.sync(path.join(root,'src/components/**/*.vue'));
 // files.map(function(filePath){
 //     entrys[path.filename(filePath)]=filePath;
 // })
-module.exports =merge(commonconfig,{
+module.exports =(env, argv)=>{
+    
+return merge(commonconfig(env,argv),{
     entry:{
         'index':path.resolve(root,'src/index.js')
     },
@@ -64,3 +66,4 @@ module.exports =merge(commonconfig,{
        }
     }
 });
+}
