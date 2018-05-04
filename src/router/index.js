@@ -6,7 +6,7 @@ export default new Router({
     mode: 'history',
     routes:[{
         name:"input",
-        path:"/input",
+        path:"input",
         component:input
     }]
 });

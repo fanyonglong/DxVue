@@ -22,7 +22,17 @@ module.exports =(env,argv)=>{
     
     if(config.extractCss)
     {
-        plugins.push( new ExtractTextPlugin("style.css"));
+        plugins.push( new ExtractTextPlugin({
+           // id:'',//id 此插件实例的唯一 ident。（仅限高级用途，默认情况下自动生成）
+           disable:false, //禁用插件
+           ignoreOrder:false,//禁用顺序检查 (这对 CSS 模块很有用！)，默认 false
+            filename: '[name].[contenthash].css', //生成文件的文件名。可能包含 [name], [id] and [contenthash]
+            /**
+             * 从所有额外的 chunk(additional chunk) 提取（默认情况下，它仅从初始chunk(initial chunk) 中提取）
+            当使用 CommonsChunkPlugin 并且在公共 chunk 中有提取的 chunk（来自ExtractTextPlugin.extract）时，allChunks **必须设置为 true
+            */
+           allChunks:true
+        }));
     }
     return {
     context:root,
@@ -79,7 +89,14 @@ module.exports =(env,argv)=>{
         include: [resolve('src'), resolve('test')]
         }]
     },   
-
+    // externals:[{
+    //     vue:{
+    //         commonjs:'vue'
+    //     },
+    //     'vue-router':{
+    //         commonjs:'vue-router'
+    //     }
+    // }],
   resolve: {
      extensions: [".js",'.vue',".css", ".json", ".jsx"],
      alias: {
