@@ -9,6 +9,7 @@ const webpack=require('webpack');
 var ManifestPlugin = require('webpack-manifest-plugin');
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const myHtml=require('../utils/webpack-plugin-html');
 // var entrys={};
 // var files=glob.sync(path.join(root,'src/components/**/*.vue'));
 // files.map(function(filePath){
@@ -36,6 +37,7 @@ module.exports =(env,argv)=>{
         },      
         devtool:false,//'eval-cheap-module-source-map', 
         plugins:[
+            new myHtml(),
             new CleanWebpackPlugin(['dist/*'],{
             root: root
         }),
@@ -58,7 +60,7 @@ module.exports =(env,argv)=>{
         //         }
         //  }),
         //Webpack清单插件 构建状态  codecov 小胶质Webpack插件用于生成资产清单。
-        new ManifestPlugin(),
+         new ManifestPlugin(),
          new webpack.DefinePlugin({
             //'process.env': require('../config/dev.env')
           }),
@@ -70,7 +72,7 @@ module.exports =(env,argv)=>{
             hashDigestLength: 散列摘要的前缀长度，默认为 4。
             用法
           */
-         //   new webpack.HashedModuleIdsPlugin(),
+         // new webpack.HashedModuleIdsPlugin(),
             // enable scope hoisting
             /*
             过去 webpack 打包时的一个取舍是将 bundle 中各个模块单独打包成闭包。
