@@ -70,6 +70,7 @@ module.exports =(env,argv)=>{
                     css:!config.extractCss?['vue-style-loader','css-loader',{
                         loader:'postcss-loader'
                     }]:ExtractTextPlugin.extract({
+                        // 从左到右
                         use: ['css-loader',{
                             loader:'postcss-loader',
                             sourceMap:config.sourceMapEnabled
@@ -84,7 +85,7 @@ module.exports =(env,argv)=>{
             }
         },{
         test:/\.js$/,
-        use:'babel-loader',
+        use:'babel-loader',// 
         include: [resolve('src'), resolve('test')]
         }]
     },   
