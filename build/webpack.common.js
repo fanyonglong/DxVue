@@ -69,8 +69,7 @@ module.exports =(env,argv)=>{
                     include: [resolve('src'), resolve('test')],
                     css:!config.extractCss?['vue-style-loader','css-loader',{
                         loader:'postcss-loader'
-                    }]:
-                    ExtractTextPlugin.extract({
+                    }]:ExtractTextPlugin.extract({
                         use: ['css-loader',{
                             loader:'postcss-loader',
                             sourceMap:config.sourceMapEnabled

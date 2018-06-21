@@ -7,3 +7,5 @@
 npm install -g vue-cli
 npm init webpack my-project
 ```
+
+## vue-loader
