@@ -21,7 +21,6 @@ export default {
             return {name:"11144"}
         },
         props:{
-          width:String
         },
         created()
         {

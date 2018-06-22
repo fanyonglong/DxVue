@@ -40,8 +40,14 @@ postcss-fixie 增加简单和无痛的IE黑客攻击
 postcss-advanced-variables 在CSS中使用类似Sass的变量，条件和迭代器
 pastcss-sass 用于PostCSS的Sass解析器，使用gonzales-pe。并非所有的Sass语法都支持。Parser正在开发中。该模块不编译Sass。它只是将mixin解析为属性的自定义规则和变量，以便PostCSS插件可以将Sass源代码与CSS一起转换。
 
-
-*/
+PreCSS由以下插件提供支持（按此顺序）：
+postcss-extend-rule
+postcss-advanced-variables
+postcss-preset-env
+postcss-atroot
+postcss-property-lookup
+postcss-nested
+****/
 
 module.exports = {
     plugins:{

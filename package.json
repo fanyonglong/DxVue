@@ -9,7 +9,8 @@
     "build": "webpack --config ./build/webpack.cpt.build.js --progress --display-error-details ",
     "dev": "webpack-dev-server --config ./build/webpack.cpt.dev.js",
     "build:dev": "webpack --config ./build/webpack.cpt.dev.js",
-    "dev2": "webpack-dev-server --hot --devtool cheap-module-eval-source-map --output-pathinfo --progress --port 9003 --open Chrome --config ./build/webpack.cpt.dev.js"
+    "dev2": "webpack-dev-server -d --hot  --port 9003 --open Chrome --config ./build/webpack.cpt.dev.js",
+    "dev3": "webpack-dev-server --config ./build/webpack.dev.js"
   },
   "repository": {
     "type": "git",
@@ -38,10 +39,8 @@
     "precss": "^3.1.2",
     "style-loader": "^0.20.3",
     "uglifyjs-webpack-plugin": "^1.2.5",
-    "vue-loader": "^14.2.1",
-    "vue-router": "^3.0.1",
+    "vue-loader": "^14.2.2",
     "vue-server-renderer": "^2.5.16",
-    "vue-style-loader": "^4.1.0",
     "vue-template-compiler": "^2.5.16",
     "vuex": "^3.0.1",
     "webpack": "^3.9.1",

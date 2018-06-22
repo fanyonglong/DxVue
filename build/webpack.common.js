@@ -40,6 +40,7 @@ module.exports =(env,argv)=>{
     output: {
         filename: 'index.js',
         path: resolve('dist'),
+        publicPath:'/'
        // libraryTarget: "umd"
     },
     module: {
@@ -48,11 +49,12 @@ module.exports =(env,argv)=>{
             test: /\.vue$/,
             loader:'vue-loader',
             options:{
+                // 默认读取postcss.配置
                 // postcss:{
                 //     useConfigFile:false,
-                //     config:{
-                //         plugins:[require('postcss-cssnext')]
-                //     }
+                //     // config:{
+                //     //     plugins:[require('postcss-cssnext')]
+                //     // }
                 // },
                 //extractCSS: true,
                 // postcss:{
@@ -62,24 +64,16 @@ module.exports =(env,argv)=>{
                 //     } 
                 // },
                 loaders: {
-                    js: 'babel-loader',
+                  //  js: 'babel-loader',
                     // js:[{ loader: 'babel-loader', options: { 
                     //     presets: ['env'] 
                     // } }],                
                     include: [resolve('src'), resolve('test')],
-                    css:!config.extractCss?['vue-style-loader','css-loader',{
-                        loader:'postcss-loader'
-                    }]:ExtractTextPlugin.extract({
+                    css:!config.extractCss?['vue-style-loader','css-loader']:ExtractTextPlugin.extract({
                         // 从左到右
-                        use: ['css-loader',{
-                            loader:'postcss-loader',
-                            sourceMap:config.sourceMapEnabled
-                        }],
+                        use: ['css-loader'],
                         fallback: 'vue-style-loader' // <- 这是vue-loader的依赖，所以如果使用npm3，则不需要显式安装
-                      }),
-                      postcss:{
-
-                      }
+                      })
                 },
                 cssSourceMap:config.sourceMapEnabled //是否开启 CSS 的 source maps，关闭可以避免 css-loader 的 some relative path related bugs 同时可以加快构建速度。
             }

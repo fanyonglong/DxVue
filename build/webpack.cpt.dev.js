@@ -18,20 +18,21 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 module.exports =(env, argv)=>{
 return merge(commonconfig(env,{extractCss:true}),{
     entry:{
-        'index':path.resolve(root,'src/index.js')
+        app:path.resolve(root,'src/index.js')
     },
     output: {
         filename: '[name].js',
         path: path.join(root, 'dist'),
-        chunkFilename:'[id].js',//此选项决定了非入口(non-entry) chunk 文件的名称
-        pathinfo:true ,//告诉 webpack 在 bundle 中引入「所包含模块信息」的相关注释
-        library: {
-            commonjs: "dx-vuexproject"
-        },
-        libraryTarget: "commonjs",
-        sourceMapFilename:'[file].map',
-        umdNamedDefine:false //会对 UMD 的构建过程中的 AMD 模块进行命名。否则就使用匿名的 define。
-     },       
+        // chunkFilename:'[id].js',//此选项决定了非入口(non-entry) chunk 文件的名称
+        // pathinfo:true ,//告诉 webpack 在 bundle 中引入「所包含模块信息」的相关注释
+        // library: {
+        //     commonjs: "dx-vuexproject"
+        // },
+        // libraryTarget: "umd",
+        // sourceMapFilename:'[file].map',
+        // umdNamedDefine:false //会对 UMD 的构建过程中的 AMD 模块进行命名。否则就使用匿名的 define。
+     },      
+   
       plugins:[
       new CleanWebpackPlugin(['dist/*'],{
         root: root
@@ -64,10 +65,10 @@ return merge(commonconfig(env,{extractCss:true}),{
     ],
    // devtool:'source-map',
     //devtool:'eval-source-map',
-   // devtool:'eval-cheap-module-source-map',
+    devtool:'eval-cheap-module-source-map',
     devServer:{
         clientLogLevel:"warning",
-        contentBase:[path.resolve(root,'dist')],
+         contentBase:[path.resolve(root,'dist')],
         port:9003,
         hot:true,
       //  openPage:
@@ -76,7 +77,7 @@ return merge(commonconfig(env,{extractCss:true}),{
         compress:true,//一切服务都启用gzip 压缩：
         index:"index.html",// 
         publicPath:"/",
-        //quiet: true,
+      //  quiet: true,
         historyApiFallback: true, //当使用 HTML5 History API 时，任意的 404 响应都可能需要被替代为 index.html。通过传入以下启用：
        // overlay:true, //当存在编译器错误或警告时，在浏览器中显示全屏叠加。默认情况下禁用。如果您只想显示编译器错误：
         watchOptions: {
