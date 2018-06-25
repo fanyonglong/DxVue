@@ -44,8 +44,6 @@ export default {
   margin-block: 0;
 }
 
-
-
 a {
   color: rebeccapurple;
 
